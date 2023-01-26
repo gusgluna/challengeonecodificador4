@@ -24,7 +24,7 @@ function encryptTextFn(text) {
     } else if (element == "a") {
       result += "ai";
     } else if (element == "o") {
-      result += "over";
+      result += "ober";
     } else if (element == "u") {
       result += "ufat";
     } else {
@@ -39,13 +39,18 @@ function decryptTextFunction(text) {
     .replace(/enter/g, "e")
     .replace(/imes/g, "i")
     .replace(/ai/g, "a")
-    .replace(/over/g, "o")
+    .replace(/ober/g, "o")
     .replace(/ufat/g, "u");
   return result;
 }
 
 encryptButton.addEventListener("click", function (event) {
   event.preventDefault();
+  copyButton.textContent = "Copiar";
+  if (!encryptText.value) {
+    messageBox.innerText = "Ningun Mensaje Fue Encontrado";
+    return;
+  }
   if (!onlyLetters(encryptText.value)) {
     messageBox.innerText = "Solo puedes usar letras minusculas [a-z]";
     return;
@@ -57,6 +62,11 @@ encryptButton.addEventListener("click", function (event) {
 
 decryptButton.addEventListener("click", function (event) {
   event.preventDefault();
+  copyButton.textContent = "Copiar";
+  if (!encryptText.value) {
+    messageBox.innerText = "Ningun Mensaje Fue Encontrado";
+    return;
+  }
   if (!onlyLetters(encryptText.value)) {
     messageBox.innerText = "Solo puedes usar letras minusculas [a-z]";
     return;
@@ -68,7 +78,7 @@ decryptButton.addEventListener("click", function (event) {
 
 copyButton.addEventListener("click", function (event) {
   event.preventDefault();
-  console.log(messageBox.innerText);
   navigator.clipboard.writeText(messageBox.innerText);
-  alert(`se copio al portapales el mensaje: ${messageBox.innerText}`);
+  // alert(`se copio al portapales el mensaje: ${messageBox.innerText}`);
+  copyButton.textContent = "Copiado";
 });
